@@ -1,10 +1,3 @@
-//
-//  SceneDelegate.swift
-//  PokedexVIP
-//
-//  Created by user on 07/04/23.
-//
-
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {

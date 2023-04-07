@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  PokedexVIP
-//
-//  Created by user on 07/04/23.
-//
-
 import UIKit
 import CoreData
 
