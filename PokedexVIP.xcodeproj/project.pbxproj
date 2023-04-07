@@ -18,6 +18,10 @@
 		CEA7EEF129E04D47009DAA87 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA7EEF029E04D47009DAA87 /* Model.swift */; };
 		CEA7EEF429E04D81009DAA87 /* Pokemons.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA7EEF329E04D81009DAA87 /* Pokemons.swift */; };
 		CEA7EEF629E04DD8009DAA87 /* Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA7EEF529E04DD8009DAA87 /* Results.swift */; };
+		CEA7EEF829E05250009DAA87 /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA7EEF729E05250009DAA87 /* URLSessionProtocol.swift */; };
+		CEA7EEFA29E0529A009DAA87 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA7EEF929E0529A009DAA87 /* NetworkError.swift */; };
+		CEA7EEFC29E052E6009DAA87 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA7EEFB29E052E6009DAA87 /* NetworkManager.swift */; };
+		CEA7EEFE29E052FB009DAA87 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA7EEFD29E052FB009DAA87 /* NetworkRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +57,10 @@
 		CEA7EEF029E04D47009DAA87 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		CEA7EEF329E04D81009DAA87 /* Pokemons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemons.swift; sourceTree = "<group>"; };
 		CEA7EEF529E04DD8009DAA87 /* Results.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Results.swift; sourceTree = "<group>"; };
+		CEA7EEF729E05250009DAA87 /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
+		CEA7EEF929E0529A009DAA87 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		CEA7EEFB29E052E6009DAA87 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		CEA7EEFD29E052FB009DAA87 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +193,10 @@
 		CEA7EEEE29E04BD3009DAA87 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				CEA7EEF729E05250009DAA87 /* URLSessionProtocol.swift */,
+				CEA7EEF929E0529A009DAA87 /* NetworkError.swift */,
+				CEA7EEFB29E052E6009DAA87 /* NetworkManager.swift */,
+				CEA7EEFD29E052FB009DAA87 /* NetworkRequest.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -335,7 +347,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEA7EEFC29E052E6009DAA87 /* NetworkManager.swift in Sources */,
+				CEA7EEF829E05250009DAA87 /* URLSessionProtocol.swift in Sources */,
+				CEA7EEFA29E0529A009DAA87 /* NetworkError.swift in Sources */,
 				CEA7EEF629E04DD8009DAA87 /* Results.swift in Sources */,
+				CEA7EEFE29E052FB009DAA87 /* NetworkRequest.swift in Sources */,
 				CEA7EEB629E04560009DAA87 /* AppDelegate.swift in Sources */,
 				CEA7EEC029E04560009DAA87 /* PokedexVIP.xcdatamodeld in Sources */,
 				CEA7EEF429E04D81009DAA87 /* Pokemons.swift in Sources */,
