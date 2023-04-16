@@ -24,6 +24,7 @@
 		CEA7EEFE29E052FB009DAA87 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA7EEFD29E052FB009DAA87 /* NetworkRequest.swift */; };
 		CEF06F1C29EC11A0004B89FE /* PokedexEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF06F1B29EC11A0004B89FE /* PokedexEndpoint.swift */; };
 		CEF06F1E29EC1238004B89FE /* PokedexRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF06F1D29EC1238004B89FE /* PokedexRepository.swift */; };
+		CEF06F2029EC13EA004B89FE /* PokedexUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF06F1F29EC13EA004B89FE /* PokedexUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		CEA7EEFD29E052FB009DAA87 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		CEF06F1B29EC11A0004B89FE /* PokedexEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexEndpoint.swift; sourceTree = "<group>"; };
 		CEF06F1D29EC1238004B89FE /* PokedexRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexRepository.swift; sourceTree = "<group>"; };
+		CEF06F1F29EC13EA004B89FE /* PokedexUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +176,7 @@
 		CEA7EEEB29E04BAB009DAA87 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				CEF06F1F29EC13EA004B89FE /* PokedexUseCase.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 				CEF06F1C29EC11A0004B89FE /* PokedexEndpoint.swift in Sources */,
 				CEA7EEB829E04560009DAA87 /* SceneDelegate.swift in Sources */,
 				CEF06F1E29EC1238004B89FE /* PokedexRepository.swift in Sources */,
+				CEF06F2029EC13EA004B89FE /* PokedexUseCase.swift in Sources */,
 				CEA7EEF129E04D47009DAA87 /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

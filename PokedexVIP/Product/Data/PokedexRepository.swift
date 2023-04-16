@@ -42,6 +42,4 @@ extension PokedexRepository: PokedexRepositoryProtocol {
             completion(.success(viewModel))
         }
     }
-    
-    
 }
