@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol PokedexCaseProtocol {
+public protocol PokedexUseCaseProtocol {
     func execute(completion: @escaping (Result<Pokemons, Error>) -> Void)
 }
 
@@ -12,7 +12,7 @@ public final class PokedexUseCase {
     }
 }
 
-extension PokedexUseCase: PokedexCaseProtocol { 
+extension PokedexUseCase: PokedexUseCaseProtocol { 
     public func execute(completion: @escaping (Result<Pokemons, Error>) -> Void) {
         repository.fetchData { result in
             switch result {

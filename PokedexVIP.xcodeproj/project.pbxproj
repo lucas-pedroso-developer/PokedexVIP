@@ -28,6 +28,7 @@
 		CEF06F2229EC170A004B89FE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF06F2129EC170A004B89FE /* HomeViewController.swift */; };
 		CEF06F2429EC17D1004B89FE /* PokedexPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF06F2329EC17D1004B89FE /* PokedexPresenter.swift */; };
 		CEF06F2629EC181E004B89FE /* PokedexProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF06F2529EC181E004B89FE /* PokedexProtocols.swift */; };
+		CEF06F2829EC194B004B89FE /* PokedexInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF06F2729EC194B004B89FE /* PokedexInteractor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		CEF06F2129EC170A004B89FE /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		CEF06F2329EC17D1004B89FE /* PokedexPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexPresenter.swift; sourceTree = "<group>"; };
 		CEF06F2529EC181E004B89FE /* PokedexProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexProtocols.swift; sourceTree = "<group>"; };
+		CEF06F2729EC194B004B89FE /* PokedexInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexInteractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +180,7 @@
 				CEF06F2129EC170A004B89FE /* HomeViewController.swift */,
 				CEF06F2329EC17D1004B89FE /* PokedexPresenter.swift */,
 				CEF06F2529EC181E004B89FE /* PokedexProtocols.swift */,
+				CEF06F2729EC194B004B89FE /* PokedexInteractor.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				CEF06F2629EC181E004B89FE /* PokedexProtocols.swift in Sources */,
 				CEF06F2229EC170A004B89FE /* HomeViewController.swift in Sources */,
 				CEA7EEB629E04560009DAA87 /* AppDelegate.swift in Sources */,
+				CEF06F2829EC194B004B89FE /* PokedexInteractor.swift in Sources */,
 				CEA7EEC029E04560009DAA87 /* PokedexVIP.xcdatamodeld in Sources */,
 				CEA7EEF429E04D81009DAA87 /* Pokemons.swift in Sources */,
 				CEF06F1C29EC11A0004B89FE /* PokedexEndpoint.swift in Sources */,
