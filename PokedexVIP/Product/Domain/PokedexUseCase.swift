@@ -12,7 +12,7 @@ public final class PokedexUseCase {
     }
 }
 
-extension PokedexUseCase: PokedexCaseProtocol {
+extension PokedexUseCase: PokedexCaseProtocol { 
     public func execute(completion: @escaping (Result<[Pokemons], Error>) -> Void) {
         repository.fetchData { result in
             switch result {
