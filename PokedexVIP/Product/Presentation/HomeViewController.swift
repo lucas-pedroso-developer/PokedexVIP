@@ -1,10 +1,3 @@
-//
-//  HomeViewController.swift
-//  PokedexVIP
-//
-//  Created by user on 16/04/23.
-//
-
 import Foundation
 import UIKit
 

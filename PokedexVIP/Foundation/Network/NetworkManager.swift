@@ -3,7 +3,7 @@ import Foundation
 public typealias NetworkResult<T: Decodable> = ((Result<T, Error>) -> Void)
 
 public protocol NetworkManagerProtocol {
-    func request<T: Decodable>(_ request: NetworkRequest, completion: @escaping NetworkResult<[T]>)
+    func request<T: Decodable>(_ request: NetworkRequest, completion: @escaping NetworkResult<T>)
 }
 
 public final class NetworkManager: NetworkManagerProtocol {
@@ -13,7 +13,7 @@ public final class NetworkManager: NetworkManagerProtocol {
         self.urlSession = urlSession
     }
     
-    public func request<T>(_ request: NetworkRequest, completion: @escaping NetworkResult<[T]>) {
+    public func request<T>(_ request: NetworkRequest, completion: @escaping NetworkResult<T>) {
         guard let url = URL(string: request.baseUrl + request.pathUrl) else {
             completion(.failure(NetworkError.invalidURL))
             return
@@ -41,7 +41,7 @@ public final class NetworkManager: NetworkManagerProtocol {
             
             do {
                 let decoder = JSONDecoder()
-                let result = try decoder.decode([T].self, from: data)
+                let result = try decoder.decode(T.self, from: data)
                 completion(.success(result))
                 
             } catch {

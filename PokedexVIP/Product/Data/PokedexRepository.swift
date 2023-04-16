@@ -1,7 +1,7 @@
 import Foundation
 
 public protocol PokedexRepositoryProtocol {
-    func fetchData(completion: @escaping (Result<[Pokemons], NetworkError>) -> Void)
+    func fetchData(completion: @escaping (Result<Pokemons, NetworkError>) -> Void)
 }
 
 public final class PokedexRepository {
@@ -9,7 +9,7 @@ public final class PokedexRepository {
     let network: NetworkManagerProtocol
     
     private let group: DispatchGroup = DispatchGroup()
-    private var pokemonsData: [Pokemons]?
+    private var pokemonsData: Pokemons?
     
     public init(network: NetworkManagerProtocol) {
         self.network = network
@@ -17,7 +17,7 @@ public final class PokedexRepository {
     
     private func fetchHomeDataSource() {
         group.enter()
-        network.request(PokedexEndpoint()) { [weak self] (response: Result<[Pokemons], Error>) in
+        network.request(PokedexEndpoint()) { [weak self] (response: Result<Pokemons, Error>) in
             switch response {
             case let .success(data):
                 self?.pokemonsData = data
@@ -31,7 +31,7 @@ public final class PokedexRepository {
 
 extension PokedexRepository: PokedexRepositoryProtocol {
     
-    public func fetchData(completion: @escaping (Result<[Pokemons], NetworkError>) -> Void) {
+    public func fetchData(completion: @escaping (Result<Pokemons, NetworkError>) -> Void) {
         fetchHomeDataSource()
         group.notify(queue: .main) { [weak self] in
             guard let pokemonsDataSource = self?.pokemonsData else {
