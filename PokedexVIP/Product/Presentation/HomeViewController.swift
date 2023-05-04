@@ -5,6 +5,7 @@ import Kingfisher
 class HomeViewController: UIViewController {
     
     var collectionView: UICollectionView!
+    var searchBar = UISearchBar()
     var pokemons: Pokemons?
     var pokemonArray = [Results?]()
     var pokemonArrayFiltered = [Results?]()
@@ -74,8 +75,7 @@ class HomeViewController: UIViewController {
     }
     
     private func setupSearchBar() {
-        let searchBar = UISearchBar()
-        searchBar.backgroundColor = .red
+        searchBar.delegate = self
         view.addSubview(searchBar)
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40).isActive = true
@@ -139,7 +139,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             cell.label.text = self.pokemonArrayFiltered[indexPath.item]?.name
             let url = (self.pokemonArrayFiltered[indexPath.item]?.url)!
             let id = String(format: "%03d", Int(url.split(separator: "/").last!)!)
-            let imageUrl = URL(string: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/\(id).png")!
+            let imageUrl = URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(id).png")!
             cell.imageView.kf.setImage(with: imageUrl)
         } else {
             if let name = self.pokemonArray[indexPath.item]?.name {
@@ -153,7 +153,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             }
         }
                         
-        cell.backgroundColor = UIColor.cyan
+        cell.backgroundColor = UIColor.lightGray
         cell.layer.borderColor = UIColor.black.cgColor
         cell.layer.borderWidth = 1
         cell.layer.cornerRadius = 8
@@ -162,7 +162,16 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+//        var idToSend: Int = 0
+//        if searchActive {
+//            let url = (self.pokemonArrayFiltered[indexPath.item]?.url)!
+//            idToSend = Int(url.split(separator: "/").last!)!
+//        } else {
+//            let url = (self.pokemonArray[indexPath.item]?.url)!
+//            idToSend = Int(url.split(separator: "/").last!)!
+//        }
+//        self.detailViewController?.id = idToSend
+//        present(self.detailViewController!, animated: true, completion: nil)
     }
     
     public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -172,66 +181,54 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
 }
 
-
-class PokemonsCollectionViewCell: UICollectionViewCell {
+extension HomeViewController: UISearchBarDelegate {
+    func updateSearchResults(for searchController: UISearchController) {}
     
-    let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        return imageView
-    }()
-    
-    let label: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = .black
-        label.textAlignment = .center
-        return label
-    }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        contentView.addSubview(imageView)
-        contentView.addSubview(label)
-        
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            imageView.bottomAnchor.constraint(equalTo: label.topAnchor)
-        ])
-        
-        label.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            label.heightAnchor.constraint(equalToConstant: 20),
-            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-        ])
+    public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        search(searchBar: searchBar, textDidChange: nil)
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        search(searchBar: searchBar, textDidChange: searchText)
     }
-}
-
-extension HomeViewController: PokedexViewControllerOutput {
-    func showData(_ data: Pokemons) {
-        self.pokemons = data
-        self.pokemonArray.append(contentsOf: (data.results)!)
+    
+    func search(searchBar: UISearchBar, textDidChange searchText: String?) {
+        self.pokemonArrayFiltered.removeAll()
+        if !searchBar.text!.isEmpty {
+            self.searchActive = true
+            self.isFinalToLoad = true
+            for item in self.pokemonArray {
+                if let name = item?.name!.lowercased() {
+                    if ((name.contains(searchBar.text!.lowercased()))) {
+                        self.pokemonArrayFiltered.append(item)
+                    }
+                }
+                if let idToSearch = Int(searchBar.text!) {
+                    if let url = item?.url!.lowercased() {
+                        let id = Int(url.split(separator: "/").last!)
+                        if id == idToSearch {
+                            self.pokemonArrayFiltered.append(item)
+                        }
+                    }
+                }
+            }
+            if (searchBar.text!.isEmpty) {
+                self.pokemonArrayFiltered = self.pokemonArray
+            }
+        } else {
+            self.searchActive = false
+            self.isFinalToLoad = false
+        }
+        
         self.collectionView.reloadData()
+        
+    }
+    
+    public func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchActive = true
     }
 
-    func showErrorMenu() {
-        print("Cenário de erro")
-    }
-
-}
-
-extension String {
-    var removeLeadingZeros: String {
-        return self.replacingOccurrences(of: "^0+", with: "", options: .regularExpression)
+    public func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchActive = false
     }
 }
