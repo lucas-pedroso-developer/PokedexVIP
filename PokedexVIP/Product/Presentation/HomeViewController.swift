@@ -16,6 +16,7 @@ class HomeViewController: UIViewController {
     let lastURL: String = "https://pokeapi.co/api/v2/pokemon?offset=780&limit=27"
     public var get: ((_ url: String) -> Void?)?
     var pokedexInteractor: PokedexInteractorProtocol?
+    var coordinator: AppCoordinator?
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -162,16 +163,17 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        var idToSend: Int = 0
-//        if searchActive {
-//            let url = (self.pokemonArrayFiltered[indexPath.item]?.url)!
-//            idToSend = Int(url.split(separator: "/").last!)!
-//        } else {
-//            let url = (self.pokemonArray[indexPath.item]?.url)!
-//            idToSend = Int(url.split(separator: "/").last!)!
-//        }
-//        self.detailViewController?.id = idToSend
-//        present(self.detailViewController!, animated: true, completion: nil)
+        var idToSend: Int = 0
+        if searchActive {
+            if let url = (self.pokemonArrayFiltered[indexPath.item]?.url) {
+                idToSend = Int(url.split(separator: "/").last!)!
+            }
+        } else {
+            if let url = (self.pokemonArray[indexPath.item]?.url) {
+                idToSend = Int(url.split(separator: "/").last!)!
+            }
+        }
+        coordinator?.showDetails(id: idToSend, controller: self)
     }
     
     public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
