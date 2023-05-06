@@ -10,28 +10,30 @@ class HomeViewController: UIViewController {
     var pokemonArray = [Results?]()
     var pokemonArrayFiltered = [Results?]()
     var searchController: UISearchController!
-    var searchActive : Bool = false
-    var isFinalToLoad : Bool = false
-    let URLToStop: String = "https://pokeapi.co/api/v2/pokemon?offset=780&limit=20"
-    let lastURL: String = "https://pokeapi.co/api/v2/pokemon?offset=780&limit=27"
-    public var get: ((_ url: String) -> Void?)?
-    var pokedexInteractor: PokedexInteractorProtocol?
     var coordinator: AppCoordinator?
+    private var searchActive : Bool = false
+    private var isFinalToLoad : Bool = false
+    private var pokedexInteractor: PokedexInteractorProtocol?
+    private var initialURL = "https://pokeapi.co/api/v2/pokemon"
     
     public override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
+        setupViews()
+        fetchData()
+    }
+    
+    private func setupViews() {
         setupLabel()
         setupLines()
         setupSearchBar()
         setupCollectionView()
-        fetchData()
     }
     
     private func fetchData() {
-        self.pokedexInteractor = createInteractor()
-        self.pokedexInteractor?.fetchData()
+        let pokedexInteractorBuilder = PokedexInteractorBuilder()
+        pokedexInteractor = pokedexInteractorBuilder.createInteractor(viewController: self)
+        pokedexInteractor?.fetchData(url: initialURL)
     }
     
     func createInteractor() -> PokedexInteractorProtocol {
@@ -120,13 +122,15 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let URLToStop: String = "https://pokeapi.co/api/v2/pokemon?offset=780&limit=20"
+        let lastURL: String = "https://pokeapi.co/api/v2/pokemon?offset=780&limit=27"
         if !searchActive {
             if !isFinalToLoad {
                 if indexPath.item == self.pokemonArray.count - 4 && self.pokemonArray.count < (self.pokemons?.count)! {
-                    if (!(self.pokemons?.next!.elementsEqual(self.URLToStop))!) {
-                        get?((self.pokemons?.next!)!)
+                    if (!(self.pokemons?.next!.elementsEqual(URLToStop))!) {
+                        self.pokedexInteractor?.fetchData(url: self.pokemons?.next ?? "")
                     } else {
-                        get?(self.lastURL)
+                        self.pokedexInteractor?.fetchData(url: lastURL)
                         self.isFinalToLoad = true
                     }
                 }

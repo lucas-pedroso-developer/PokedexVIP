@@ -12,8 +12,8 @@ public final class PokedexInteractor {
 }
 
 extension PokedexInteractor: PokedexInteractorProtocol {
-    public func fetchData() {
-        useCase.execute { [weak self] result in
+    public func fetchData(url: String) {
+        useCase.execute(url: url) { [weak self] result in
             switch result {
             case let .success(data): self?.presenter.fetchedSuccessData(data)
             case .failure: self?.presenter.fetchedErrorData()

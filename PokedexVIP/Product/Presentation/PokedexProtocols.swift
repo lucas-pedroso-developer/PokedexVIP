@@ -1,7 +1,7 @@
 import Foundation
 
 public protocol PokedexInteractorProtocol {
-    func fetchData()
+    func fetchData(url: String)
 }
 
 public protocol PokedexPresenterProtocol {
