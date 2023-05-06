@@ -1,10 +1,3 @@
-//
-//  PokedexInteractorBuilder.swift
-//  PokedexVIP
-//
-//  Created by user on 06/05/23.
-//
-
 import Foundation
 import UIKit
 

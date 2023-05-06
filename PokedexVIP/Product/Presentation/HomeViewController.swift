@@ -2,6 +2,12 @@ import Foundation
 import UIKit
 import Kingfisher
 
+enum urls: String {
+    case initialURL = "https://pokeapi.co/api/v2/pokemon"
+    case urlToStop = "https://pokeapi.co/api/v2/pokemon?offset=780&limit=20"
+    case lastURL = "https://pokeapi.co/api/v2/pokemon?offset=780&limit=27"
+}
+
 class HomeViewController: UIViewController {
     
     var collectionView: UICollectionView!
@@ -14,7 +20,7 @@ class HomeViewController: UIViewController {
     private var searchActive : Bool = false
     private var isFinalToLoad : Bool = false
     private var pokedexInteractor: PokedexInteractorProtocol?
-    private var initialURL = "https://pokeapi.co/api/v2/pokemon"
+//    private var initialURL = "https://pokeapi.co/api/v2/pokemon"
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,17 +39,7 @@ class HomeViewController: UIViewController {
     private func fetchData() {
         let pokedexInteractorBuilder = PokedexInteractorBuilder()
         pokedexInteractor = pokedexInteractorBuilder.createInteractor(viewController: self)
-        pokedexInteractor?.fetchData(url: initialURL)
-    }
-    
-    func createInteractor() -> PokedexInteractorProtocol {
-        let presenter = PokedexPresenter()
-        let network = NetworkManager()
-        let repository = PokedexRepository(network: network)
-        let useCase = PokedexUseCase(repository: repository)
-        let interactor = PokedexInteractor(presenter: presenter, useCase: useCase)
-        presenter.controller = self
-        return interactor
+        pokedexInteractor?.fetchData(url: urls.initialURL.rawValue)
     }
     
     private func setupLabel() {
@@ -122,15 +118,15 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        let URLToStop: String = "https://pokeapi.co/api/v2/pokemon?offset=780&limit=20"
-        let lastURL: String = "https://pokeapi.co/api/v2/pokemon?offset=780&limit=27"
+//        let URLToStop: String = "https://pokeapi.co/api/v2/pokemon?offset=780&limit=20"
+//        let lastURL: String = "https://pokeapi.co/api/v2/pokemon?offset=780&limit=27"
         if !searchActive {
             if !isFinalToLoad {
                 if indexPath.item == self.pokemonArray.count - 4 && self.pokemonArray.count < (self.pokemons?.count)! {
-                    if (!(self.pokemons?.next!.elementsEqual(URLToStop))!) {
+                    if (!(self.pokemons?.next!.elementsEqual(urls.urlToStop.rawValue))!) {
                         self.pokedexInteractor?.fetchData(url: self.pokemons?.next ?? "")
                     } else {
-                        self.pokedexInteractor?.fetchData(url: lastURL)
+                        self.pokedexInteractor?.fetchData(url: urls.lastURL.rawValue)
                         self.isFinalToLoad = true
                     }
                 }
