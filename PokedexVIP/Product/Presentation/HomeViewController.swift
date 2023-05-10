@@ -17,10 +17,9 @@ class HomeViewController: UIViewController {
     var pokemonArrayFiltered = [Results?]()
     var searchController: UISearchController!
     var coordinator: AppCoordinator?
-    private var searchActive : Bool = false
+    var searchActive : Bool = false
     private var isFinalToLoad : Bool = false
-    private var pokedexInteractor: PokedexInteractorProtocol?
-//    private var initialURL = "https://pokeapi.co/api/v2/pokemon"
+    var pokedexInteractor: PokedexInteractorProtocol?
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +28,23 @@ class HomeViewController: UIViewController {
         fetchData()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupViews()
+    }
+
+    
+//    init(pokedexInteractor: PokedexInteractorProtocol) {
+//        super.init(nibName: nil, bundle: nil)
+//        self.pokedexInteractor = pokedexInteractor
+//    }
+//
+//
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+    
     private func setupViews() {
         setupLabel()
         setupLines()
@@ -36,7 +52,7 @@ class HomeViewController: UIViewController {
         setupCollectionView()
     }
     
-    private func fetchData() {
+    func fetchData() {
         let pokedexInteractorBuilder = PokedexInteractorBuilder()
         pokedexInteractor = pokedexInteractorBuilder.createInteractor(viewController: self)
         pokedexInteractor?.fetchData(url: urls.initialURL.rawValue)
@@ -83,7 +99,7 @@ class HomeViewController: UIViewController {
         searchBar.heightAnchor.constraint(equalToConstant: 22).isActive = true
     }
     
-    private func setupCollectionView() {
+    func setupCollectionView() {
         let layout = UICollectionViewFlowLayout()
         self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         self.collectionView.register(PokemonsCollectionViewCell.self, forCellWithReuseIdentifier: "PokemonsCollectionViewCell")

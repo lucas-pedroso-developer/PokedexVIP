@@ -57,7 +57,11 @@ extension HomeViewController: PokedexViewControllerOutput {
     func showData(_ data: Pokemons) {
         self.pokemons = data
         self.pokemonArray.append(contentsOf: (data.results)!)
-        self.collectionView.reloadData()
+        if let collectionView = self.collectionView {
+            collectionView.reloadData()
+        }
+            
+//        self.collectionView.reloadData()
     }
 
     func showErrorMenu() {

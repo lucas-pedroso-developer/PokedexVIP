@@ -26,7 +26,7 @@ class AppCoordinator: Coordinator {
         window.rootViewController = viewController
         window.makeKeyAndVisible()
     }
-    
+
     func showDetails(id: Int, controller: UIViewController) {
         let viewController = DetailViewController()
         viewController.coordinator = self
